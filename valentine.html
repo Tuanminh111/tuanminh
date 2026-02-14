@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+/* Gradient chuyển động */
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Container */
+.container{
+    position:relative;
+    width:350px;
+    height:350px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Tim */
+.heart{
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:#ff1e56;
+    transform:rotate(-45deg);
+    animation:beat 1.2s infinite;
+    box-shadow:0 0 40px rgba(255,0,80,0.7);
+}
+
+.heart:before,
+.heart:after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:#ff1e56;
+    border-radius:50%;
+}
+
+.heart:before{
+    top:-130px;
+    left:0;
+}
+
+.heart:after{
+    left:130px;
+    top:0;
+}
+
+@keyframes beat{
+    0%{ transform:rotate(-45deg) scale(1); }
+    50%{ transform:rotate(-45deg) scale(1.12); }
+    100%{ transform:rotate(-45deg) scale(1); }
+}
+
+/* Text */
+.text{
+    position:absolute;
+    width:230px;
+    text-align:center;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    line-height:1.5;
+    z-index:10;
+    text-shadow:0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Hoa hồng */
+.rose{
+    position:absolute;
+    top:-50px;
+    font-size:22px;
+    animation:fall linear forwards;
+    opacity:0.9;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-50px) rotate(0deg); opacity:1;}
+    100%{transform:translateY(110vh) rotate(360deg); opacity:0;}
+}
+
+/* Sparkle */
+.sparkle{
+    position:absolute;
+    color:white;
+    font-size:12px;
+    animation: sparkleMove 3s linear forwards;
+    opacity:0.8;
+}
+
+@keyframes sparkleMove{
+    0%{transform:translateY(0) scale(1); opacity:1;}
+    100%{transform:translateY(-100px) scale(0.5); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="heart"></div>
+    <div class="text">
+        chúc bé yêu valentine<br>
+        thật ngọt ngào 💖
+    </div>
+</div>
+
+<script>
+
+/* Hoa hồng rơi */
+function createRose(){
+    const rose = document.createElement("div");
+    rose.classList.add("rose");
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random()*100 + "vw";
+    rose.style.animationDuration = (4 + Math.random()*4) + "s";
+    document.body.appendChild(rose);
+
+    setTimeout(()=>{ rose.remove(); },8000);
+}
+setInterval(createRose,400);
+
+/* Hạt lấp lánh */
+function createSparkle(){
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle");
+    sparkle.innerHTML = "✨";
+    sparkle.style.left = Math.random()*100 + "vw";
+    sparkle.style.top = Math.random()*100 + "vh";
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>{ sparkle.remove(); },3000);
+}
+setInterval(createSparkle,300);
+
+</script>
+
+</body>
+</html>
